@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Git
         run: |
-          git config --global user.name "Seu Nome"
-          git config --global user.email "seu-email@exemplo.com"
+          git config --global user.name "joseNork"
+          git config --global user.email "josehenrique@nork.digital"
 
       - name: Run sync script
         run: |
