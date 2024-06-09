@@ -20,7 +20,8 @@ jobs:
 
       - name: Run sync script
         run: |
-          chmod +x sync.sh
-          ./github/scripts/sync.sh
+          chmod +x ./.github/scripts/sync.sh
+          ./.github/scripts/sync.sh
+        shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.UPDATE_DERIVED_REPOS_SECRET }}
