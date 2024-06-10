@@ -6,6 +6,12 @@ REPOS=(
 
 TEMP_DIR=$(mktemp -d)
 
+cleanup() {
+    rm -rf $TEMP_DIR
+}
+
+trap cleanup EXIT
+
 update_repo() {
     REPO_URL=$1
     REPO_NAME=$(basename $REPO_URL .git)
@@ -18,7 +24,7 @@ update_repo() {
     
     git fetch template
     
-    git merge template/main -m "Update from template"
+    git merge template/main --allow-unrelated-histories -m "Update from template"
     
     git push origin main
     
@@ -28,5 +34,3 @@ update_repo() {
 for REPO in "${REPOS[@]}"; do
     update_repo $REPO
 done
-
-rm -rf $TEMP_DIR
