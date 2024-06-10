@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPOS=(
-    "git@github.com:joseNork/joseimob.git"
+    "https://x-access-token:${GITHUB_TOKEN}@github.com/geimob/joseimob.git"
 )
 
 TEMP_DIR=$(mktemp -d)
@@ -14,7 +14,7 @@ update_repo() {
     
     cd $TEMP_DIR/$REPO_NAME
     
-    git remote add template https://github.com/geimob/geimob-regular.git
+    git remote add template https://x-access-token:${GITHUB_TOKEN}@github.com/geimob/geimob-regular.git
     
     git fetch template
     
