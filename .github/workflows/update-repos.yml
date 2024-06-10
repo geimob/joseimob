@@ -16,7 +16,7 @@ jobs:
       - name: Set up Git
         run: |
           git config --global user.name "joseNork"
-          git config --global user.email "josehenrique@nork.digital"
+          git config --global user.email josehenrique@nork.digital
 
       - name: Run sync script
         run: |
