@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPOS=(
-    "https://github.com/geimob/joseimob.git"
+    "git@github.com:joseNork/joseimob.git"
 )
 
 TEMP_DIR=$(mktemp -d)
