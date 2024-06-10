@@ -1,0 +1,28 @@
+name: Update Derived Repos
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-repos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "joseNork"
+          git config --global user.email josehenrique@nork.digital
+
+      - name: Run sync script
+        run: |
+          chmod +x ./.github/scripts/sync.sh
+          ./.github/scripts/sync.sh
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.UPDATE_DERIVED_REPOS_SECRET }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
