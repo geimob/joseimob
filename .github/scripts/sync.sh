@@ -9,6 +9,10 @@ TEMP_DIR=$(mktemp -d)
 update_repo() {
     REPO_URL=$1
     REPO_NAME=$(basename $REPO_URL .git)
+
+    Username for 'https://github.com': joseNork
+
+    Password for 'https://joseNork@github.com': PASSWORD
     
     git clone $REPO_URL $TEMP_DIR/$REPO_NAME
     
