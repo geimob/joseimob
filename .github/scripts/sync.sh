@@ -38,9 +38,15 @@ update_repo() {
         
         # Resolve conflicts by accepting the incoming changes
         for file in $(git diff --name-only --diff-filter=U); do
-            echo "Resolving conflict in $file by accepting incoming changes"
-            git checkout --theirs $file
-            git add $file
+            if [[ $file != .github* ]]; then
+                echo "Resolving conflict in $file by accepting incoming changes"
+                git checkout --theirs $file
+                git add $file
+            else
+                echo "Skipping .github folder"
+                git checkout --ours $file
+                git add $file
+            fi
         done
         
         git commit -m "Resolved merge conflicts by accepting incoming changes" || {
