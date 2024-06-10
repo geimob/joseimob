@@ -36,15 +36,17 @@ update_repo() {
     git merge template/main --allow-unrelated-histories -m "Update from template" || {
         echo "Merge conflict detected. Attempting to resolve automatically."
         
-        # Resolve conflicts using the "theirs" strategy
-        git merge --strategy-option theirs template/main -m "Update from template with automatic conflict resolution" || {
+        # Resolve conflicts by accepting the incoming changes
+        for file in $(git diff --name-only --diff-filter=U); do
+            echo "Resolving conflict in $file by accepting incoming changes"
+            git checkout --theirs $file
+            git add $file
+        done
+        
+        git commit -m "Resolved merge conflicts by accepting incoming changes" || {
             echo "Automatic conflict resolution failed. Manual intervention required."
             exit 1
         }
-        
-        # Ensure all files are added after resolving conflicts
-        git add -A
-        git commit -m "Resolved merge conflicts using theirs strategy"
     }
     
     echo "Pushing changes to origin"
